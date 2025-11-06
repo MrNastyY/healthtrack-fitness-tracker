@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -24,7 +24,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run migrations
+        run: python manage.py migrate
+
       - name: Run Django tests
-        run: |
-          python manage.py migrate
-          python manage.py test
+        run: python manage.py test
